@@ -1,10 +1,12 @@
+import os
 from flask import Flask, jsonify, render_template, request
 import pymysql
 
 app = Flask(__name__)
 
 def get_db_connection():
-    connection = pymysql.connect(host='mydb.cylck8yh5jkc.eu-central-1.rds.amazonaws.com',  # Replace with your RDS endpoint
+    rds_endpoint = os.environ.get('RDS_ENDPOINT')
+    connection = pymysql.connect(host=rds_endpoint,  # Replace with your RDS endpoint
                                  user='dbuser',      # Replace with your RDS username
                                  password='dbpassword',  # Replace with your RDS password
                                  db='devprojdb',   # Replace with your database name
