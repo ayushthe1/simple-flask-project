@@ -6,6 +6,8 @@ app = Flask(__name__)
 
 def get_db_connection():
     rds_endpoint = os.environ.get('RDS_ENDPOINT')
+    if not rds_endpoint:
+        raise ValueError("RDS endpoint environment variable not set")
     connection = pymysql.connect(host=rds_endpoint,  # Replace with your RDS endpoint
                                  user='dbuser',      # Replace with your RDS username
                                  password='dbpassword',  # Replace with your RDS password
